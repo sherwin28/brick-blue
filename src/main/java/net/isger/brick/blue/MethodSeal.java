@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import net.isger.brick.blue.Marks.TYPE;
+
 /**
  * 方法套件
  * 
@@ -55,6 +57,12 @@ public class MethodSeal {
         this.operateMarks = new HashMap<String, MethodSeal>();
         this.codingMarks = new HashMap<String, CodeSeal>();
         this.codings = new ArrayList<CodeSeal>();
+    }
+
+    public MethodSeal(String owner, int access, Class<?> type, String name,
+            Class<?>... argTypes) {
+        this(owner, access, type.getName(), name, TYPE
+                .getArgTypeNames(argTypes));
     }
 
     public void markConst(String alias, Object value) {

@@ -12,6 +12,7 @@ public class ClassQuiet extends ClassSeal {
     }
 
     private void makeClassMethod() {
+        // static Class class$(String name) {
         MethodSeal ms = super.makeMethod(ACCESS.STATIC.value, TYPE.CLASS.name,
                 "class$", TYPE.STRING.name);
         ms.markOperate("Class.forName(str)", TYPE.CLASS.name,
@@ -19,7 +20,9 @@ public class ClassQuiet extends ClassSeal {
                 TYPE.STRING.name);
         ms.markCoding("Class.forName(str)", null, "Class.forName(str)",
                 MISC.arg(0));
+        // return Class.forName(name);
         ms.coding("return", null, "Class.forName(str)");
+        // }
     }
 
     public MethodSeal makeMethod(int access, String type, String name,
@@ -34,7 +37,7 @@ public class ClassQuiet extends ClassSeal {
         if (result) {
             String owner = ms.getOwner();
             ms.markOperate("class", owner, OPCODES.INVOKESTATIC.value,
-                    "java.lang.Class", "class$", "java.lang.String");
+                    TYPE.CLASS.name, "class$", TYPE.STRING.name);
         }
         return result;
     }

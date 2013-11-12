@@ -1,6 +1,8 @@
 package net.isger.brick.blue;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.slf4j.Logger;
@@ -545,6 +547,20 @@ public interface Marks {
             return desc.toString();
         }
 
+        public static String getMethDesc(Class<?> type, Class<?>... argTypes) {
+            return getMethDesc(type.getName(), getArgTypeNames(argTypes));
+        }
+
+        public static String[] getArgTypeNames(Class<?>... argTypes) {
+            List<String> result = new ArrayList<String>();
+            if (argTypes != null) {
+                for (Class<?> argType : argTypes) {
+                    result.add(argType.getName());
+                }
+            }
+            return result.toArray(new String[result.size()]);
+        }
+
         /**
          * 获取描述占用空间大小
          * 
@@ -667,6 +683,14 @@ public interface Marks {
 
         public static String arg(int i) {
             return String.format(FMT_ARGS, i);
+        }
+
+        public static String[] args(int count) {
+            String[] args = new String[count];
+            for (int i = 0; i < count; i++) {
+                args[i] = arg(i);
+            }
+            return args;
         }
 
         public static Object[] var(int i, String type) {

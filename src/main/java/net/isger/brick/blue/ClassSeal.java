@@ -100,6 +100,13 @@ public class ClassSeal implements Marks {
         return this.addMethod(method) ? method : null;
     }
 
+    public MethodSeal makeMethod(int access, Class<?> type, String name,
+            Class<?>... argTypes) {
+        MethodSeal method = new MethodSeal(this.name, access, type, name,
+                argTypes);
+        return this.addMethod(method) ? method : null;
+    }
+
     /**
      * 添加方法
      * 
